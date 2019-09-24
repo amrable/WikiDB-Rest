@@ -115,6 +115,22 @@ app.route("/articles/:articleTitle")
   }
 )
 
+.patch(
+  function(req,res){
+    Article.update(
+      {title: req.params.articleTitle},
+      {$set: req.body },
+      function(err){
+        if(!err){
+          res.send("Successfuly updated");
+        }else{
+          res.send(err);
+        }
+      }
+    );
+  }
+)
+
 .delete(
   function(req,res){
     const title = req.params.articleTitle;
