@@ -35,7 +35,7 @@ app.get("/articles",function(req,res){
     if(!err){
       res.send(foundArticles);
     }else{
-      console.log(err);
+      res.send(err);
     }
   });
 });
