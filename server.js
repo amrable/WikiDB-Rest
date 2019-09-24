@@ -93,16 +93,38 @@ app.route("/articles/:articleTitle")
   }
 )
 
+.put(
+  function(req,res){
+
+    console.log(req.body.title);
+    console.log(req.body.content);
+    console.log(req.body.content);
+    Article.update(
+      {title: req.params.articleTitle},
+      {title: req.body.title , content: req.body.content},
+      {overwrite: true},
+      function(err){
+        if(!err){
+          res.send("Successfuly updated")
+        }else{
+          res.send(err);
+        }
+      }
+
+    );
+  }
+)
+
 .delete(
-function(req,res){
-  const title = req.params.articleTitle;
+  function(req,res){
+    const title = req.params.articleTitle;
 
-  Article.deleteOne({title:title},function(err){
-    if(!err)
-      res.send("Entry deleted Successfuly");
-    else
-      res.send(err);
-  });
+    Article.deleteOne({title:title},function(err){
+      if(!err)
+        res.send("Entry deleted Successfuly");
+      else
+        res.send(err);
+    });
 
-}
+  }
 );
