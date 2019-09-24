@@ -91,4 +91,18 @@ app.route("/articles/:articleTitle")
       }
     });
   }
+)
+
+.delete(
+function(req,res){
+  const title = req.params.articleTitle;
+
+  Article.deleteOne({title:title},function(err){
+    if(!err)
+      res.send("Entry deleted Successfuly");
+    else
+      res.send(err);
+  });
+
+}
 );
