@@ -21,10 +21,21 @@ mongoose.connect("mongodb://localhost:27017/wikiDB", {useNewUrlParser: true});
 const articleSchema = {
   title: String,
   content: String
-} 
+}
 
-const Article = mongoose.model('Article');
+const Article = mongoose.model('Article',articleSchema);
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
+});
+
+
+app.get("/articles",function(req,res){
+  Article.find({},function(err,foundArticles){
+    if(!err){
+      res.send(foundArticles);
+    }else{
+      console.log(err);
+    }
+  });
 });
