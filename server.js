@@ -76,3 +76,19 @@ app.route("/articles")
 
   }
 );
+
+
+app.route("/articles/:articleTitle")
+
+.get(
+  function(req,res){
+    const title = req.params.articleTitle;
+    Article.findOne({title: title},function(err,foundArticle){
+      if(!err){
+        res.send(foundArticle);
+      }else{
+        res.send(err);
+      }
+    });
+  }
+);
