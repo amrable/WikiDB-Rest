@@ -39,3 +39,22 @@ app.get("/articles",function(req,res){
     }
   });
 });
+
+app.post("/articles",function(req,res){
+  const title = req.body.title;
+  const content = req.body.content;
+  //
+  // console.log(title);
+  // console.log(content);
+  const newArticle = new Article({
+    title: title,
+    content: content
+  });
+
+  newArticle.save(function(err){
+    if(!err)
+      res.send("Successfuly inserted a new article.");
+      else
+        res.send(err);
+  });
+});
